@@ -1,0 +1,17 @@
+class Peak(object):
+
+    def __init__(self, mz, rt, areas):
+        self.__mz = mz
+        self.__rt = rt
+        self.__areas = areas # first 5 peak areas
+
+        self.__avg_area = sum(self.__areas)/len(self.__areas)
+
+    def get_mz(self):
+        return self.__mz
+
+    def get_rt(self):
+        return self.__rt
+
+    def get_avg_area(self):
+        return self.__avg_area

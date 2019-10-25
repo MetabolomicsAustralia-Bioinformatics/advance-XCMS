@@ -1,0 +1,17 @@
+
+# possible features for assessing quality of EIC
+
+1) sigmal maxima
+2) range of values (max - min)
+3) strength of fit to gaussian function
+4) parameters of gaussian function
+5) avg intensity of noise surrounding peak
+6) relative intensity of 1st 2nd and 3rd thirds of chormatogram
+7) difference between rtmin and rtmax
+8) difference between mzmin and mzmax
+
+# can get these from xcmsSet objects
+9) number of imputed values
+10) rtWidth
+11) mzWidth
+

@@ -1,0 +1,49 @@
+def read_peaks(infile):
+
+    fp = open(infile, 'r')
+
+    peaks = []
+    
+    for line in fp.readlines()[1:]:
+        parts = line.split('\t')
+
+        for part in parts:
+            index = int(parts[0].strip('"'))
+            mz = float(parts[1])
+            rt = float(parts[4])
+            areas = []
+            for i in range(11,16):
+                areas.append(float(parts[i]))
+
+        peak = Peak(index, mz, rt, areas)
+        peaks.append(Peak)
+
+    return peaks
+
+def calc_similarity(peak1, peak2, max_rt=200, area_param=5):
+    """ use a retention time window
+    and an m/z and area similarity score"""
+
+    if abs(peak1.get_rt() - peak2.get_rt()) > max_rt:
+        score = 0
+    else:
+        max_mz = peak1.get_mz() - peak2.get_mz()
+        area_diff = peak1.get_avg_area() - peak2.get_avg_area()
+
+        score = (20-max_mz) + (area_param/area_diff)
+
+    if score < 0:
+        score = 0
+    return score
+
+def calc_score_matrix(peaklist1, peaklist2):
+
+    score_matrix = Score(len(peaklist1), len(peaklist2))
+    
+    for peak1 in peaklist1:
+        for peak2 in peaklist2:
+            score = calc_similarity(peak1, peak2)
+            score_matrix.add_score(score, peak1.get_index(), peak2.get_index())
+
+    return score_matrix.get_score_matrix()
+            

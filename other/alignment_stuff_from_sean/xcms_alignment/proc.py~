@@ -1,0 +1,10 @@
+from Function import read_peaks, calc_score_matrix
+
+if __name__ == "__init__":
+
+    peaks1 = read_peaks('Pks_An_b1.tsv')
+    peaks2 = read_peaks('Pks_An_b2.tsv')
+
+    score_matrix = calc_score_matrix(peaks1, peaks2)
+
+ 
